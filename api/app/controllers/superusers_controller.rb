@@ -26,7 +26,7 @@ class SuperusersController < APIBaseController
   end
 
   def destroy
-    @superuser.delete
+    
   end
 
   def online_users
