@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20200728084927) do
+ActiveRecord::Schema.define(version: 20200821213304) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -36,10 +36,10 @@ ActiveRecord::Schema.define(version: 20200728084927) do
     t.index ["sender_type", "sender_id"], name: "index_messages_on_sender_type_and_sender_id"
   end
 
-  create_table "posts", force: :cascade do |t|
+  create_table "products", force: :cascade do |t|
     t.string "title"
     t.text "content"
-    t.string "picurl"
+    t.string "picture"
     t.string "caption1"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -68,6 +68,16 @@ ActiveRecord::Schema.define(version: 20200728084927) do
     t.datetime "updated_at", null: false
     t.string "role"
     t.boolean "online", default: false, null: false
+    t.string "surname", default: ""
+    t.string "birthday", default: ""
+    t.string "gender", default: ""
+    t.string "email", default: ""
+    t.string "caption", default: ""
+    t.float "rank", default: 1.0
+    t.index ["birthday"], name: "index_users_on_birthday"
+    t.index ["email"], name: "index_users_on_email"
+    t.index ["gender"], name: "index_users_on_gender"
+    t.index ["rank"], name: "index_users_on_rank"
   end
 
 end

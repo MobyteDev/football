@@ -17,7 +17,7 @@ class APIBaseController < ActionController::API
       authenticate_superuser
     else
       authenticate_user
-      current_user.update(verify: true) if current_user.verify == false
+      #current_user.update(verify: true) if current_user.verify == false
     end
   end
 

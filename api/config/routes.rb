@@ -3,12 +3,12 @@ Rails.application.routes.draw do
   mount ActionCable.server => '/cable'
 
   post :user_token, to: 'user_token#create'
-  resources :user
+  resource :user
 
   post :superuser_token, to: 'superuser_token#create'
   resources :superuser
 
-  resources :posts
+  resources :products
 
   resources :messages
   resources :chats

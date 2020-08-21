@@ -11,7 +11,7 @@ services:
       - db
       - redis
     ports:
-      - "3000:3000"
+      - "3002:3002"
     environment:
       - BUNDLE_PATH=/bundle
       - RAILS_ENV=${RAILS_ENV}

@@ -35,8 +35,8 @@ class User < ApplicationRecord
   end
 
   def generate_password(phone_number)
-    # new_password = '1234' # TODO: Пока что поумолчанию пароль 1234, потом рандом
-    p new_password = rand(0000..9999).to_s.rjust(4, '0')
+    new_password = '0000' # TODO: Пока что поумолчанию пароль 0000, потом рандом
+    # p new_password = rand(0000..9999).to_s.rjust(4, '0')
     self.password = new_password
     save
     call_service = CallPasswordService.new(phone_number, new_password)
