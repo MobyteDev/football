@@ -14,6 +14,7 @@ class Ability
     elsif user&.class == Superuser
       can :manage, User
       can :manage, Product
+      can :manage, Category
       can :manage, Superuser
       can :manage, Chat
       can :manage, Message
