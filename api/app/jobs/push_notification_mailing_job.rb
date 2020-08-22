@@ -22,7 +22,7 @@ class PushNotificationMailingJob < ApplicationJob
 
     registration_ids.uniq.each_slice(999) do |registration_id|
       response = fcm_client.send(registration_id, options)
-      response = JSON.parse(response[:body]).deep_transform_keys(&:to_sym)
+      p response = JSON.parse(response[:body]).deep_transform_keys(&:to_sym)
       if response[:failure] > 0
         @invalid_pushes = []
 
