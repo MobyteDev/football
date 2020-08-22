@@ -2,17 +2,17 @@ class CommandChannel < ApplicationCable::Channel
   MESSAGE_TYPES = [1, 2].freeze
 
   def subscribed
+    stream_from room_id
     if !current_user.superuser?
       current_user.update(online: true)
       ActionCable.server.broadcast room_id, message: 'Пользователь вошел в флешмоб!', user_id: current_user.id, sender_type: 'System', count_online: User.where(online: true).count
     end
-    stream_from room_id
   end
 
   def unsubscribed
     if !current_user.superuser?
       current_user.update(online: false)
-      ActionCable.server.broadcast room_id, message: 'Пользователь вошел из флешмоба!', user_id: current_user.id, sender_type: 'System', count_online: User.where(online: true).count
+      ActionCable.server.broadcast room_id, message: 'Пользователь вышел из флешмоба!', user_id: current_user.id, sender_type: 'System', count_online: User.where(online: true).count
     end
 
   end
@@ -23,7 +23,7 @@ class CommandChannel < ApplicationCable::Channel
     command = data['command']
     return if command.blank? && content.blank?
 
-    ActionCable.server.broadcast room_id, message: content, command: command, sender_type: "Superuser", time: Time.zone.now, count_online: User.where(online: true).count
+    ActionCable.server.broadcast room_id, message: content, command: command, sender_type: 'System', time: Time.zone.now, count_online: User.where(online: true).count
   end
 
   protected
