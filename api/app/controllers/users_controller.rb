@@ -35,7 +35,7 @@ class UsersController < APIBaseController
   end
 
   def get_rating
-    users = User.all.order(:rank).page(params[:page])
+    users = !User.where(id: 5).order(:rank).page(params[:page])
     if users.empty?
       render status: :no_content
     else
