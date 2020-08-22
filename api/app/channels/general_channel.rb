@@ -17,10 +17,10 @@ class GeneralChannel < ApplicationCable::Channel
 
     return unless MESSAGE_TYPES.include?(type_message)
 
-    new_message = Message.new(content: content, sender: current_user, chat_id: chat_id, picture: picture, type_message: type_message, sender_name: current_user.name)
+    new_message = Message.new(content: content, sender: current_user, chat_id: chat_id, picture: picture, type_message: type_message, sender_name: current_user.name, sender_avatar: current_user.avatar)
     return unless new_message.save
 
-    ActionCable.server.broadcast room_id, message: content, picture: new_message.picture, type_message: type_message, sender_type: new_message.sender_type, sender_id:new_message.sender_id, sender_name: current_user.name, created_at: new_message.created_at
+    ActionCable.server.broadcast room_id, message: content, picture: new_message.picture, type_message: type_message, sender_type: new_message.sender_type, sender_id: new_message.sender_id, sender_name: current_user.name, sender_avatar: current_user.avatar), created_at: new_message.created_at
     # notify_service = PushNotificationService.new(new_message, current_user, chat_id)
     # notify_service.fcm_push_notification
   end

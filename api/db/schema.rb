@@ -38,6 +38,7 @@ ActiveRecord::Schema.define(version: 20200822105543) do
     t.integer "type_message"
     t.boolean "status", default: false
     t.string "sender_name", default: ""
+    t.string "sender_avatar", default: ""
     t.index ["chat_id"], name: "index_messages_on_chat_id"
     t.index ["sender_type", "sender_id"], name: "index_messages_on_sender_type_and_sender_id"
   end
