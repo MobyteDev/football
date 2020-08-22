@@ -25,6 +25,16 @@ class UsersController < APIBaseController
     end
   end
 
+  def update_basket
+    @user.update(basket: params[:basket])
+    if @user.errors.blank?
+      render status: :ok
+    else
+      render json: @user.errors, status: :bad_request
+    end
+  end
+
+
   protected
 
   def load_user

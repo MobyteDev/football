@@ -3,7 +3,9 @@ Rails.application.routes.draw do
   mount ActionCable.server => '/cable'
 
   post :user_token, to: 'user_token#create'
-  resource :user
+  resource :user do
+    post :update_basket, on: :member
+  end
 
   post :superuser_token, to: 'superuser_token#create'
   resource :superuser
