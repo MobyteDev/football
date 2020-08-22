@@ -39,8 +39,8 @@ class SuperusersController < APIBaseController
   end
 
   def push_message_to_all
-    PushNotificationMailingJob.perform_now(params[:content])
-    render status: :ok
+    result = PushNotificationMailingJob.perform_now(params[:content])
+    render json: result, status: :ok
   end
 
   def start_chant
