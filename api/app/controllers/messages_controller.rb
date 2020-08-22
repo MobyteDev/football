@@ -1,6 +1,6 @@
 class MessagesController < APIBaseController
-  authorize_resource
-  before_action :auth_user
+  authorize_resource except: %i[get_history_general]
+  before_action :auth_user, except: %i[get_history_general]
 
   def index
     if current_user.present?
