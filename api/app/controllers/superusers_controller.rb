@@ -39,7 +39,7 @@ class SuperusersController < APIBaseController
   end
 
   def push_message_to_all
-    p PushNotificationMailingJob.perform_now(params[:content])
+    PushNotificationMailingJob.perform_now(params[:content])
     render status: :ok
   end
 

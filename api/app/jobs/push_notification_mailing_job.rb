@@ -9,11 +9,10 @@ class PushNotificationMailingJob < ApplicationJob
 
   def fcm_push_notification_to_all(content)
     fcm_client = FCM.new(Rails.application.secrets.api_fcm_token) # set your FCM_SERVER_KEY
-    body = content
 
     options = { priority: 'high',
-                data: { message: body },
-                notification: { body: body,
+                data: { message: content },
+                notification: { body: content,
                                 title: 'У вас новое сообщение от клуба!',
                                 sound: 'default',
                                 click_action: 'FLUTTER_NOTIFICATION_CLICK' } }
