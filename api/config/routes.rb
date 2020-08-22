@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   post :user_token, to: 'user_token#create'
   resource :user do
     post :update_basket, on: :member
+    post :add_achievement, on: :member
     get :get_rating, on: :member
   end
 
@@ -12,6 +13,8 @@ Rails.application.routes.draw do
   resource :superuser
 
   resources :products
+  resources :chants
+  resources :achievements
   resources :categories
 
   resources :messages do

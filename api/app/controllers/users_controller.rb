@@ -34,6 +34,15 @@ class UsersController < APIBaseController
     end
   end
 
+  def add_achievement
+    @user.update(achievement: params[:achievement])
+    if @user.errors.blank?
+      render status: :ok
+    else
+      render json: @user.errors, status: :bad_request
+    end
+  end
+
   def get_rating
     users = User.where.not(id: 5).order(rank: :desc).page(params[:page])
     if users.empty?

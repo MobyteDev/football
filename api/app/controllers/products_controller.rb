@@ -1,4 +1,4 @@
-class ProductsController< APIBaseController
+class ProductsController < APIBaseController
   authorize_resource except: %i[index show]
 
   before_action :auth_user, except: %i[index show]
@@ -51,7 +51,7 @@ class ProductsController< APIBaseController
     @product = Product.find(params[:id])
     if @product.errors.blank?
       @product.delete
-      @product.remove_picurl!
+      @product.remove_picture!
       @product.save
       render status: :ok
     else

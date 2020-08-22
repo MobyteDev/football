@@ -10,10 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20200822144029) do
+ActiveRecord::Schema.define(version: 20200822161143) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "achievements", force: :cascade do |t|
+    t.string "name", default: ""
+    t.string "caption", default: ""
+    t.string "picture", default: ""
+    t.float "reward", default: 1.0
+  end
 
   create_table "categories", force: :cascade do |t|
     t.string "name"
@@ -93,6 +100,7 @@ ActiveRecord::Schema.define(version: 20200822144029) do
     t.jsonb "basket"
     t.string "name", default: ""
     t.string "avatar"
+    t.jsonb "achievements"
     t.index ["birthday"], name: "index_users_on_birthday"
     t.index ["email"], name: "index_users_on_email"
     t.index ["gender"], name: "index_users_on_gender"
