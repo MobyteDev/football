@@ -1,6 +1,6 @@
 class ChatsController < APIBaseController
-  authorize_resource
-  before_action :auth_user
+  authorize_resource except: %i[get_chat_general]
+  before_action :auth_user, except: %i[get_chat_general]
 
   def index
     if current_superuser.present?
