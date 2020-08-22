@@ -6,9 +6,10 @@ Rails.application.routes.draw do
   resource :user
 
   post :superuser_token, to: 'superuser_token#create'
-  resources :superuser
+  resource :superuser
 
   resources :products
+  resources :categories
 
   resources :messages
   resources :chats

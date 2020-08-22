@@ -8,12 +8,12 @@ class Ability
 
     if user&.class == User
       can :manage, User, id: user.id
-      can :read, Post
+      can :read, Product
       can :read, Chat, id: user.chat.id
       can :read, Message, sender_id: user.id
     elsif user&.class == Superuser
       can :manage, User
-      can :manage, Post
+      can :manage, Product
       can :manage, Superuser
       can :manage, Chat
       can :manage, Message
