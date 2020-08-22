@@ -17,5 +17,7 @@ Rails.application.routes.draw do
     get :get_history_general, on: :collection
   end
 
-  resources :chats
+  resources :chats do
+    get :get_chat_general, on: :collection
+  end
 end

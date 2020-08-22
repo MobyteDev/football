@@ -28,6 +28,11 @@ class ChatsController < APIBaseController
     end
   end
 
+  def get_chat_general
+    chat = Chat.find(6)
+      render json: chat, status: :ok
+  end
+
   def update; end
 
   def destroy
