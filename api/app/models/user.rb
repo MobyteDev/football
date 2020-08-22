@@ -34,8 +34,34 @@ class User < ApplicationRecord
     false
   end
 
+  def as_json(_options = {})
+    {
+        id: self.id,
+        name: self.name,
+        phone_number: self.phone_number,
+        created_at: self.created_at,
+        updated_at: self.updated_at,
+        online: self.online,
+        surname: self.surname,
+        birthday: self.birthday,
+        gender: self.gender,
+        email: self.email,
+        caption: self.caption,
+        rank: self.rank,
+        basket: self.basket,
+        avatar: self.avatar,
+        place: self.get_place.as_json
+      }
+  end
+
 
   protected
+
+  def get_place
+    users = User.all.order(:rank)
+    users.to_a.each_index { |x| p @place = x + 1 if users[x] == self}
+    @place
+  end
 
   def create_chat
     Chat.create(user_id: id)

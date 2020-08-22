@@ -4,7 +4,7 @@ class UsersController < APIBaseController
   before_action :auth_user, except: %i[create get_rating]
 
   def show
-    render json: @user.to_json(except: %i[password_digest push_token])
+    render json: @user
   end
 
   def update
@@ -39,12 +39,13 @@ class UsersController < APIBaseController
     if users.empty?
       render status: :no_content
     else
-      render json: users.to_json(except: %i[password_digest push_token phone_number created_at updated_at role online birthday gender email caption basket])
+      render json: users.to_json(except: %i[id name surname rank avatar])
     end
   end
 
 
   protected
+
 
   def load_user
     @user = current_user
