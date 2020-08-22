@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20200822101401) do
+ActiveRecord::Schema.define(version: 20200822105543) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -37,6 +37,7 @@ ActiveRecord::Schema.define(version: 20200822101401) do
     t.string "picture"
     t.integer "type_message"
     t.boolean "status", default: false
+    t.string "sender_name", default: ""
     t.index ["chat_id"], name: "index_messages_on_chat_id"
     t.index ["sender_type", "sender_id"], name: "index_messages_on_sender_type_and_sender_id"
   end
