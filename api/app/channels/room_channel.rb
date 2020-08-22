@@ -31,10 +31,6 @@ class RoomChannel < ApplicationCable::Channel
     d_price = data['d_price']
     return if type_message != 2 && content.blank?
 
-    if !current_user.superuser? && current_user.banned?
-      ActionCable.server.broadcast room_id, message: "Вы заблокированны по причине: '#{current_user.reason}'", type_message: 1, sender_type: 'User'
-      return
-    end
     return unless MESSAGE_TYPES.include?(type_message)
 
     new_message = Message.new(content: content, sender: current_user, chat_id: chat_id, picture: picture, type_message: type_message)

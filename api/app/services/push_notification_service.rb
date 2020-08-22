@@ -26,11 +26,10 @@ class PushNotificationService
       collapseKey: chat_id.to_s,
       data: { message: @message.content,
               chat_id: @chat_id,
-              phone_number: @chat.user.phone_number },
+              phone_number: @chat.user.name },
       notification: {
         body: body.truncate(265),
         android_channel_id: '1',
-        image: image,
         title: title,
         sound: 'default',
         click_action: 'FLUTTER_NOTIFICATION_CLICK'
@@ -88,11 +87,11 @@ class PushNotificationService
 
   def title
     if @user.superuser?
-      USER_TITLE 
+      SUPERUSER_TITLE + ' ' + @chat.user.name
     elsif !@user.superuser? && @message.type_message == 3
       SUPERUSER_ORDER_TITLE + ' ' + @chat.user.phone_number
     else
-      SUPERUSER_TITLE + ' ' + @chat.user.phone_number
+      SUPERUSER_TITLE + ' ' + @chat.user.name
     end
   end
 
