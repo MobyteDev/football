@@ -10,7 +10,10 @@ Rails.application.routes.draw do
   end
 
   post :superuser_token, to: 'superuser_token#create'
-  resource :superuser
+  resource :superuser do
+    post :push_message_to_all, on: :member
+    get :show_user, on: :member
+  end
 
   resources :products
   resources :chants

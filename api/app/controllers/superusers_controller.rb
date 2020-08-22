@@ -29,15 +29,6 @@ class SuperusersController < APIBaseController
     
   end
 
-  def online_users
-    online_users = User.all.where(online: true)
-    if online_users.empty?
-      render status: :no_content
-    else
-      render json: online_users, except: %i[password_digest created_at], status: :ok
-    end
-  end
-
   def show_user
     user = User.find(params[:id])
     if user.errors.blank?
@@ -45,6 +36,11 @@ class SuperusersController < APIBaseController
     else
       render status: :bad_request
     end
+  end
+
+  def push_message_to_all
+    PushNotificationMailingJob.perform_now(params[:content])
+    render status: :ok
   end
 
   protected
