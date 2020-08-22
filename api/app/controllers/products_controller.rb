@@ -61,8 +61,8 @@ class ProductsController< APIBaseController
 
   protected
 
-  def default_producth_fields
-    %i[caption1 title picture content]
+  def default_product_fields
+    %i[category_id name subname price caption1 picture]
   end
 
   def update_product_params
