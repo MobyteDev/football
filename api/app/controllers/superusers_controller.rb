@@ -45,12 +45,12 @@ class SuperusersController < APIBaseController
 
   def start_chant
     chant = Chant.find(params[:id])
-    ActionCable.server.broadcast room_id, params: {chant: chant.content, flash_light: params[:flash_light]}, type_event: "chant", sender_type: 'Superuser', time: Time.zone.now
+    ActionCable.server.broadcast "command_channel_1", params: {chant: chant.content, flash_light: params[:flash_light]}, type_event: "chant", sender_type: 'Superuser', time: Time.zone.now
     render status: :ok
   end
 
   def start_lightshow
-    ActionCable.server.broadcast room_id, params: {mode: params[:mode]}, type_event: "lightshow", sender_type: 'Superuser', time: Time.zone.now
+    ActionCable.server.broadcast "command_channel_1", params: {mode: params[:mode]}, type_event: "lightshow", sender_type: 'Superuser', time: Time.zone.now
     render status: :ok
   end
 
