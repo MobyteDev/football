@@ -22,7 +22,7 @@ class CommandChannel < ApplicationCable::Channel
 
   def receive(data)
     p check_in = data['check_in']
-    if check_in == :ok
+    if check_in == "ok"
       current_user.add_rank(REWARD_POINTS)
     end
 
