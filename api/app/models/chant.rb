@@ -1,0 +1,3 @@
+class Chant < ApplicationRecord
+
+end

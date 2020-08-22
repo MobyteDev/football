@@ -13,6 +13,7 @@ class Ability
       can :read, Message, sender_id: user.id
     elsif user&.class == Superuser
       can :manage, User
+      can :manage, Chant
       can :manage, Product
       can :manage, Category
       can :manage, Superuser
