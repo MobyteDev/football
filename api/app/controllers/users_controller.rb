@@ -1,7 +1,7 @@
 class UsersController < APIBaseController
-  before_action :load_user, except: %i[create]
-  authorize_resource except: %i[create]
-  before_action :auth_user, except: %i[create]
+  before_action :load_user, except: %i[create get_rating]
+  authorize_resource except: %i[create get_rating]
+  before_action :auth_user, except: %i[create get_rating]
 
   def show
     render json: @user.to_json(except: %i[password_digest push_token])
@@ -31,6 +31,15 @@ class UsersController < APIBaseController
       render status: :ok
     else
       render json: @user.errors, status: :bad_request
+    end
+  end
+
+  def get_rating
+    users = User.all.order(:rank).page(params[:page])
+    if users.empty?
+      render status: :no_content
+    else
+      render json: users.to_json(except: %i[password_digest push_token phone_number created_at updated_at role online birthday gender email caption basket])
     end
   end
 
