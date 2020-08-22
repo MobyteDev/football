@@ -13,7 +13,7 @@ class PushNotificationMailingJob < ApplicationJob
     options = { priority: 'high',
                 data: { message: content },
                 notification: { body: content,
-                                title: 'У вас новое сообщение от клуба!',
+                                title: '📨 У вас новое сообщение от клуба!',
                                 sound: 'default',
                                 click_action: 'FLUTTER_NOTIFICATION_CLICK' } }
 
