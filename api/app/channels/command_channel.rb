@@ -24,6 +24,7 @@ class CommandChannel < ApplicationCable::Channel
     check_in = data['check_in']
     if check_in == :ok
       current_user.add_rank(REWARD_POINTS)
+    end
 
   end
 
