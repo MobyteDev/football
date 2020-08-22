@@ -14,7 +14,7 @@ Rails.application.routes.draw do
   resources :categories
 
   resources :messages do
-    get :get_history_general, on: :member
+    get :get_history_general, on: :collection
   end
 
   resources :chats
