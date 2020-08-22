@@ -8,7 +8,7 @@ class CommandChannel < ApplicationCable::Channel
     end
     stream_from room_id
     if current_user.superuser?
-      ActionCable.server.broadcast room_id, message: "Здравствуйте, начинайте флешмоб, вас ждут #{User.where(online: true).count} болельщиков!", sender_type: 'System', count_online: User.where(online: true).count
+      ActionCable.server.broadcast room_id, message: "Здравствуйте, начинайте флешмоб, вас ждут #{count = User.where(online: true).count} болельщиков!", sender_type: 'System', count_online: count
     end
   end
 
