@@ -42,7 +42,7 @@ class UsersController < APIBaseController
   end
 
   def default_user_fields
-    %i[name surname birthday email caption gender push_token]
+    %i[name surname birthday email caption gender push_token avatar]
   end
 
   def update_user_params

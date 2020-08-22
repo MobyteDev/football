@@ -10,6 +10,10 @@ class User < ApplicationRecord
 
   enumerize :role, in: %i[user], default: :user, predicates: true, scope: :shallow
 
+  mount_uploader :avatar, UserUploader
+
+  mount_base64_uploader :avatar, UserUploader
+
   def to_token_payload
     {
       sub: id,
