@@ -13,6 +13,8 @@ Rails.application.routes.draw do
   resource :superuser do
     post :push_message_to_all, on: :member
     get :show_user, on: :member
+    post :start_chant, on: :member
+    post :start_lightshow, on: :member
   end
 
   resources :products

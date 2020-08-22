@@ -34,6 +34,11 @@ class User < ApplicationRecord
     false
   end
 
+  def add_rank(count)
+    new_rank = self.rank + count
+    self.update(rank: new_rank)
+  end
+
   def as_json(_options = {})
     {
         id: self.id,

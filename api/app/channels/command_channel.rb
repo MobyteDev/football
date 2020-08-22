@@ -1,11 +1,14 @@
 class CommandChannel < ApplicationCable::Channel
-  MESSAGE_TYPES = [1, 2].freeze
+  REWARD_POINTS = 5.0.freeze
 
   def subscribed
-    stream_from room_id
     if !current_user.superuser?
       current_user.update(online: true)
       ActionCable.server.broadcast room_id, message: 'Пользователь вошел в флешмоб!', user_id: current_user.id, sender_type: 'System', count_online: User.where(online: true).count
+    end
+    stream_from room_id
+    if current_user.superuser?
+      ActionCable.server.broadcast room_id, message: "Здравствуйте, начинайте флешмоб, вас ждут #{User.where(online: true).count} болельщиков!", sender_type: 'System', count_online: User.where(online: true).count
     end
   end
 
@@ -18,12 +21,10 @@ class CommandChannel < ApplicationCable::Channel
   end
 
   def receive(data)
-    type_message = data['type_message']
-    content = data['message']
-    command = data['command']
-    return if command.blank? && content.blank?
+    check_in = data['check_in']
+    if check_in == :ok
+      current_user.add_rank(REWARD_POINTS)
 
-    ActionCable.server.broadcast room_id, message: content, command: command, sender_type: 'System', time: Time.zone.now, count_online: User.where(online: true).count
   end
 
   protected
