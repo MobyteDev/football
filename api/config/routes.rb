@@ -13,6 +13,9 @@ Rails.application.routes.draw do
   resources :products
   resources :categories
 
-  resources :messages
+  resources :messages do
+    get :get_history_general, on: :member
+  end
+
   resources :chats
 end
