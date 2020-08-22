@@ -58,7 +58,7 @@ class User < ApplicationRecord
   protected
 
   def get_place
-    users = User.all.order(:rank)
+    users = User.all.order(rank: :desc)
     users.to_a.each_index { |x| p @place = x + 1 if users[x] == self}
     @place
   end
