@@ -1,7 +1,5 @@
 class PushNotificationMailingJob < ApplicationJob
   queue_as :default
-  before_perform :init_redis
-
 
   def perform(content)
     p fcm_push_notification_to_all(content)
@@ -19,7 +17,7 @@ class PushNotificationMailingJob < ApplicationJob
                                 title: 'У вас новое сообщение от клуба!',
                                 sound: 'default',
                                 click_action: 'FLUTTER_NOTIFICATION_CLICK' } }
-                                
+
     registration_ids = User.where.not(push_token: 0).pluck(:push_token)
 
     registration_ids.uniq.each_slice(999) do |registration_id|
