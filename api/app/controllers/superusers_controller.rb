@@ -45,7 +45,7 @@ class SuperusersController < APIBaseController
 
   def start_chant
     chant = Chant.find(params[:id])
-    ActionCable.server.broadcast "command_channel_1", params: {chant: chant.content, chant.title, duration: chant.duration, flash_light: params[:flash_light]}, type_event: "chant", sender_type: 'Superuser', time: Time.zone.now
+    ActionCable.server.broadcast "command_channel_1", params: {chant: chant.content, title: chant.title, duration: chant.duration, flash_light: params[:flash_light]}, type_event: "chant", sender_type: 'Superuser', time: Time.zone.now
     render status: :ok
   end
 
